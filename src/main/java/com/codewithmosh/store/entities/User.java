@@ -12,7 +12,6 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Entity
 @Table(name = "users")
@@ -66,5 +65,19 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @Builder.Default
     private Set<Product> favoriteProducts = new HashSet<>();
+
+    public void AddFavoriteProduct(Product product) {
+        favoriteProducts.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
